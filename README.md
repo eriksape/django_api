@@ -89,7 +89,20 @@ HTTP Status Code `400`
 Response example
 ```json
 {
-  "error": "..."
+    "error": {
+        "currency": [
+            {
+                "message": "This field is required.",
+                "code": "required"
+            }
+        ],
+        "frequency": [
+            {
+                "message": "This field is required.",
+                "code": "required"
+            }
+        ]
+    }
 }
 ```
 
@@ -117,7 +130,26 @@ HTTP Status Code `400`
 Response example
 ```json
 {
-  "error": "..."
+    "error": {
+        "frequency": [
+            {
+                "message": "This field is required.",
+                "code": "required"
+            }
+        ],
+        "id": [
+            {
+                "message": "This field is required.",
+                "code": "required"
+            }
+        ],
+        "value": [
+            {
+                "message": "Enter a whole number.",
+                "code": "invalid"
+            }
+        ]
+    }
 }
 ```
 
@@ -145,7 +177,14 @@ HTTP Status Code `400`
 Response example
 ```json
 {
-  "error": "..."
+    "error": {
+        "id": [
+            {
+                "message": "The scraper was not found.",
+                "code": "not_found"
+            }
+        ]
+    }
 }
 ```
 
