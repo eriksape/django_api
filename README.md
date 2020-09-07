@@ -33,10 +33,12 @@ Migrations are running on starting doker-compose no need to re run
 
 GET `/api/scrapers/`
 
+HTTP Status Code `200`
 ```sh
 curl --request GET http://localhost:8000/api/scrapers/
 ```
 Response example
+HTTP Status Code `200`
 ```json
 {
   "scrapers": [
@@ -62,6 +64,7 @@ Response example
 
 POST `/api/scrapers/`
 
+HTTP Status Code `200`
 ```sh
 curl --header "Content-Type: application/json" \
      --request POST \
@@ -79,8 +82,20 @@ Response example
 }
 ```
 
+In case of any validation error
+
+HTTP Status Code `400`
+
+Response example
+```json
+{
+  "error": "..."
+}
+```
+
 PUT `/api/scrapers/`
 
+HTTP Status Code `200`
 ```sh
 curl --header "Content-Type: application/json" \
      --request PUT \
@@ -95,7 +110,20 @@ Response example
 }
 ```
 
+In case of any validation error
+
+HTTP Status Code `400`
+
+Response example
+```json
+{
+  "error": "..."
+}
+```
+
 DELETE `/api/scrapers`
+
+HTTP Status Code `200`
 ```sh
 curl --header "Content-Type: application/json" \
      --request DELETE \
@@ -110,9 +138,19 @@ Response example
 }
 ```
 
+In case of any validation error
+
+HTTP Status Code `400`
+
+Response example
+```json
+{
+  "error": "..."
+}
+```
+
 ## Tests
 To run the tests for the project run the follow script
 ```sh
 python manage.py test api
 ```
-
