@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  api:
+    build: ./
+    working_dir: /var/www/api
+    command: /bin/sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./.:/var/www/api
+    ports: 
+      - 8080:8000
