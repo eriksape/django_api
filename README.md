@@ -154,3 +154,7 @@ To run the tests for the project run the follow script
 ```sh
 python manage.py test api
 ```
+
+And test are automated thanks to [github actions](https://github.com/features/actions) ♥️
+
+[Here](https://github.com/eriksape/django_api/actions) are automated test runned in this project
