@@ -1,7 +1,7 @@
 import json
 
 from django.core import serializers
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.views.generic import View
 
 from api.forms import CreateScrapper, UpdateScrapper, DeleteScrapper
