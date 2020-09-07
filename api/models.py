@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.utils import timezone
 
 
 class Scraper(models.Model):
@@ -13,3 +16,12 @@ class Scraper(models.Model):
 
     def __str__(self):
         return self.currency
+
+
+@receiver(pre_save, sender=Scraper)
+def post_update_scraper(**kwargs):
+    instance = kwargs['instance']
+    if instance.id:
+        old_instance = Scraper.objects.get(id=kwargs['instance'].id)
+        if old_instance.value != instance.value:
+            instance.value_updated_at = timezone.now()
