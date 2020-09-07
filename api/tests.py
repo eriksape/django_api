@@ -125,7 +125,7 @@ class ScraperViewTests(TestCase):
 
     def test_200_in_delete_scraper(self):
         """Check for 200 status code to post Scraper"""
-        json_data = json.dumps({'currency': 'Bitcoin_new', 'frequency': 10, 'id': self.scraper.id})
+        json_data = json.dumps({'id': self.scraper.id})
         url = reverse('scrapers')
         response = self.client.delete(url, json_data, 'json')
         self.assertEqual(response.status_code, 200)
@@ -146,7 +146,21 @@ class ScraperViewTests(TestCase):
 
     def test_400_in_delete_scraper(self):
         """Check for 400 status code to post Scraper"""
-        json_data = json.dumps({'currency': 'Bitcoin_new', 'frequency': 10})
+        json_data = json.dumps({})
         url = reverse('scrapers')
         response = self.client.delete(url, json_data, 'json')
         self.assertEqual(response.status_code, 400)
+
+    def test_200_put_scraper_message(self):
+        """Check for 200 status code to post Scraper"""
+        json_data = json.dumps({'currency': 'Bitcoin_new', 'frequency': 10, 'id': self.scraper.id})
+        url = reverse('scrapers')
+        response = self.client.put(url, json_data, 'json')
+        self.assertEqual(response.json()['msg'], 'Scraper updated')
+
+    def test_200_in_delete_scraper_message(self):
+        """Check for message response when deleted"""
+        json_data = json.dumps({'id': self.scraper.id})
+        url = reverse('scrapers')
+        response = self.client.delete(url, json_data, 'json')
+        self.assertEqual(response.json()['msg'], 'Scraper deleted')
