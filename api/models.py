@@ -2,11 +2,14 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils import timezone
+from django.utils.timezone import utc
+
 
 class CustomDateTimeField(models.DateTimeField):
 
     def value_to_string(self, obj):
-        return getattr(obj, self.name, True).strftime('%Y-%m-%dT%H:%M:%S+0000')
+        datetime = getattr(obj, self.name, True).utcnow().replace(tzinfo=utc)
+        return str(datetime)
 
     def value_from_object(self, obj):
         return obj
