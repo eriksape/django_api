@@ -44,8 +44,8 @@ class ScraperAPI(View):
             }, safe=False)
         else:
             return JsonResponse({
-                'error': ', '.join(['{}: {}'.format(k, v[0]) for k, v in form.errors.items()])
-            }, safe=False, status=400)
+                'error': json.loads(form.errors.as_json())
+            }, status=400, content_type='application/json')
 
     def delete(self, request, *args, **kwargs):
         data = json.loads(request.body)
@@ -57,5 +57,5 @@ class ScraperAPI(View):
             }, safe=False)
         else:
             return JsonResponse({
-                'error': ', '.join(['{}: {}'.format(k, v[0]) for k, v in form.errors.items()])
-            }, safe=False, status=400)
+                'error': json.loads(form.errors.as_json())
+            }, status=400, content_type='application/json')
