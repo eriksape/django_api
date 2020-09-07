@@ -32,7 +32,7 @@ class ScraperAPI(View):
 
         return JsonResponse({
             'error': json.loads(form.errors.as_json())
-        }, status=400, content_type="application/json")
+        }, status=400, content_type='application/json')
 
     def put(self, request, *args, **kwargs):
         data = json.loads(request.body)
@@ -40,7 +40,7 @@ class ScraperAPI(View):
         if form.is_valid():
             scraper = form.save()
             return JsonResponse({
-                "msg": "The scraper with id {} was updated successfully".format(scraper.id)
+                'msg': 'Scraper updated'
             }, safe=False)
         else:
             return JsonResponse({
@@ -53,7 +53,7 @@ class ScraperAPI(View):
         if form.is_valid():
             scraper = form.delete()
             return JsonResponse({
-                "msg": "The scraper with id {} was deleted successfully".format(data['id'])
+                'msg': 'Scraper deleted'
             }, safe=False)
         else:
             return JsonResponse({
