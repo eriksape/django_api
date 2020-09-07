@@ -1,5 +1,5 @@
-# Django API
-Django API Project
+# Django API Project
+A django template
 
 ## Instaltion
 
