@@ -50,7 +50,7 @@ class UpdateScrapper(forms.ModelForm):
     def clean_id(self):
         id_exists = Scraper.objects.filter(id=self.cleaned_data['id']).exists()
         if not id_exists:
-            raise forms.ValidationError('The Id is not found.')
+            raise forms.ValidationError('The Id is not found.', 'not_found')
         return self.cleaned_data['id']
 
     def save(self):
@@ -61,6 +61,7 @@ class UpdateScrapper(forms.ModelForm):
             scraper.value = self.cleaned_data['value']
         scraper.save()
         return scraper
+
 
 class DeleteScrapper(forms.ModelForm):
     """Update endpoint."""
@@ -77,7 +78,7 @@ class DeleteScrapper(forms.ModelForm):
     def clean_id(self):
         id_exists = Scraper.objects.filter(id=self.cleaned_data['id']).exists()
         if not id_exists:
-            raise forms.ValidationError('The scraper was not found.')
+            raise forms.ValidationError('The scraper was not found.', 'not_found')
         return self.cleaned_data['id']
 
     def delete(self):
