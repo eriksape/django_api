@@ -3,6 +3,13 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils import timezone
 
+class CustomDateTimeField(models.DateTimeField):
+
+    def value_to_string(self, obj):
+        return getattr(obj, self.name, True).strftime('%Y-%m-%dT%H:%M:%S+0000')
+
+    def value_from_object(self, obj):
+        return obj
 
 class Scraper(models.Model):
     """
@@ -11,8 +18,8 @@ class Scraper(models.Model):
     currency = models.CharField(max_length=50, unique=True)
     frequency = models.IntegerField()
     value = models.FloatField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    value_updated_at = models.DateTimeField(auto_now_add=True)
+    created_at = CustomDateTimeField(auto_now_add=True)
+    value_updated_at = CustomDateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.currency
